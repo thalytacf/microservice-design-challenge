@@ -1,0 +1,19 @@
+[lint]
+
+select = [
+  "E",    # Erros de estilo (PEP8)
+  "F",    # Erros de sintaxe/variáveis (pyflakes)
+  "B",    # Bugs comuns (flake8-bugbear)
+  "I",    # Importações (isort)
+  "UP",   # Atualizações de Python (pyupgrade)
+  "C90",  # Regras do mccabe (complexidade)
+]
+
+exclude = [
+  ".git",
+  "__pycache__",
+  "venv",
+  "env",
+  ".venv",
+  "kubernetes",
+]

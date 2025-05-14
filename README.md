@@ -100,6 +100,18 @@ Libraries to use:
 
 ---
 
+## Code Quality
+
+This project uses [Ruff](https://github.com/charliermarsh/ruff) as a static code analyzer to enforce code style, catch bugs early, and maintain high code quality.
+
+Ruff is configured via the `.ruff.toml` file and runs automatically in the CI pipeline on every push and pull request.
+
+In addition, automated tests are executed using `pytest` to verify application correctness and reliability.
+
+Together, these tools help ensure the codebase remains clean, consistent, and robust before deployment.
+
+---
+
 ## How to Run Locally
 
 ```bash
@@ -127,10 +139,11 @@ Kubernetes manifests are located in `/kubernetes/` and ready to be applied.
 
 ## Future Improvements
 
-* Add authentication and rate-limiting
-* Include observability stack (Prometheus + Grafana)
-* Enable GitHub Environments for PR approvals
-* Setup full test automation
+* Add authentication and rate-limiting  
+* Include observability stack (Prometheus + Grafana)  
+* Enable GitHub Environments for PR approvals  
+* Setup full test automation  
+* Integrate Redis for caching and asynchronous task handling  
 
 ---
 
