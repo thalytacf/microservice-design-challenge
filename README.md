@@ -75,6 +75,18 @@ Dockerfile provided in the project root. Minimal FastAPI app with:
 
 ---
 
+## Deployment
+
+The CI/CD pipeline includes steps for building and pushing the Docker image, as well as applying Kubernetes manifests.
+
+**Note:** For this design-focused challenge, the Kubernetes deployment step in the pipeline is mocked. The real deployment only runs if the `KUBECONFIG` secret is configured in the GitHub repository, which is not included here.
+
+This approach allows the pipeline to complete successfully and simulate the deployment flow without requiring actual access to a Kubernetes cluster.
+
+In production or full implementation scenarios, proper cluster access and secrets must be configured for automated deployment.
+
+---
+
 ## Testing Strategy
 
 This project includes initial unit tests and outlines a broader testing strategy to ensure API correctness and future scalability.

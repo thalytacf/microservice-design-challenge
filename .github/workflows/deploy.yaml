@@ -58,6 +58,7 @@ jobs:
         docker push $REGISTRY/${IMAGE_NAME}:latest
 
     - name: Deploy no Kubernetes
+      if: ${{ secrets.KUBECONFIG != '' }}
       uses: azure/k8s-deploy@v4
       with:
         manifests: |
@@ -67,6 +68,9 @@ jobs:
           kubernetes/hpa.yaml
         images: |
           ghcr.io/${{ github.repository }}:latest
-        kubectl-version: "latest"
         namespace: default
         kubeconfig: ${{ secrets.KUBECONFIG }}
+
+    - name: Deploy no Kubernetes 
+      if: ${{ secrets.KUBECONFIG == '' }}
+      run: echo "⚠️ KUBECONFIG não configurado — deploy ignorado no CI"
