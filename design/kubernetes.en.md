@@ -55,8 +55,6 @@ All Kubernetes manifests are located in the `kubernetes/` directory:
 ## 4. Future Improvements
 
 - Use `Secrets` for sensitive environment variables like database passwords.
-- Add `Liveness` and `Readiness` probes to improve resilience and orchestration.
-- Integrate with an **Ingress Controller** to expose the service externally via a domain.
 - Monitor metrics with Prometheus + Grafana or similar tools.
 
 ---

@@ -48,8 +48,8 @@ Obtém o código-fonte do repositório para a máquina virtual do GitHub Actions
     python -m pip install --upgrade pip
     pip install -r requirements.txt
     pip install pytest ruff
-
 ```
+
 Reaproveita cache do pip para acelerar instalação e instala dependências do projeto, além de ferramentas para testes e lint.
 
 ### 2.3 Análise estática e testes automatizados
@@ -62,7 +62,7 @@ Reaproveita cache do pip para acelerar instalação e instala dependências do p
   run: pytest --maxfail=1 --disable-warnings -q
 ```
 
-Executa o linter ruff para garantir qualidade do código e executa testes unitários com pytest.
+Executa o linter `ruff` para garantir qualidade do código e executa testes unitários com `pytest`.
 
 
 ### 2.4 Login no GitHub Container Registry
@@ -85,6 +85,7 @@ Autentica no registro de containers do GitHub.
   run: |
     docker build -t $REGISTRY/${IMAGE_NAME}:latest .
 ```
+
 Cria a imagem Docker com a tag latest, utilizando o Dockerfile na raiz do projeto.
 
 ### 2.6 Push da imagem para o GHCR

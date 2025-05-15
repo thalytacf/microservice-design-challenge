@@ -48,7 +48,5 @@ This section outlines the planned approach to testing the microservice, focusing
 
 ## 5. Future Improvements
 
-- **CI:** Run tests automatically in the GitHub Actions pipeline.
 - **Isolated environment:** Automated tests with a simulated database via Docker.
 - **Monitoring:** Add continuous performance tests and alerts in production.
-

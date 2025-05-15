@@ -55,8 +55,6 @@ Todos os manifestos do Kubernetes estão localizados no diretório `kubernetes/`
 ## 4. Melhorias Futuras
 
 - Utilizar `Secrets` para variáveis sensíveis como senhas de banco de dados.
-- Adicionar `Liveness` e `Readiness probes` para melhorar a resiliência.
-- Integrar com um **Ingress Controller** para expor o serviço externamente via domínio.
 - Monitorar métricas com ferramentas como Prometheus e Grafana.
 
 ---

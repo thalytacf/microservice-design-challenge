@@ -55,8 +55,5 @@ Esta seção descreve a abordagem planejada para testar o microserviço, com foc
 
 ## Melhorias Futuras 
 
-- **CI:** Rodar os testes automaticamente no pipeline GitHub Actions.
 - **Ambiente isolado:** Testes automatizados com banco de dados isolado via Docker.
 - **Monitoramento:** Adição de testes contínuos de performance e alertas em produção.
-
-

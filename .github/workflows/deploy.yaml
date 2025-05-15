@@ -57,7 +57,7 @@ jobs:
       run: |
         docker push $REGISTRY/${IMAGE_NAME}:latest
 
-    - name: Aplicar deploy no cluster Kubernetes
+    - name: Deploy no Kubernetes
       uses: azure/k8s-deploy@v4
       with:
         manifests: |

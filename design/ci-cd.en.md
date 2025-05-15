@@ -20,10 +20,10 @@ The pipeline is automatically triggered on every push to the `main` branch.
 ### 2.1 Checkout the code and Environment Setup
 
 ```yaml
-- name: Checkout code
+- name: Checkout código
   uses: actions/checkout@v3
 
-- name: Set up Python
+- name: Configurar Python
   uses: actions/setup-python@v4
   with:
     python-version: '3.9'
@@ -42,7 +42,7 @@ This step retrieves the code from the repository and configures the Python envir
     restore-keys: |
       ${{ runner.os }}-pip-
 
-- name: Install dependencies
+- name: Instalar dependências
   run: |
     python -m pip install --upgrade pip
     pip install -r requirements.txt
@@ -54,10 +54,10 @@ Reuses pip cache to speed up installations and installs project dependencies, in
 ### 2.3 Static Analysis and Automated Testing
 
 ```yaml
-- name: Run linter (ruff)
+- name: Verificar qualidade do código (ruff)
   run: ruff check .
 
-- name: Run unit tests (pytest)
+- name: Rodar testes (pytest)
   run: pytest --maxfail=1 --disable-warnings -q
 ```
 
@@ -66,7 +66,7 @@ Runs the `ruff` linter to ensure code quality and executes unit tests with `pyte
 ### 2.4 Login to GitHub Container Registry
 
 ```yaml
-- name: Login to GitHub Container Registry
+- name: Login no GitHub Container Registry
   uses: docker/login-action@v2
   with:
     registry: ghcr.io
@@ -79,7 +79,7 @@ This step authenticates to the GitHub Container Registry using the GitHub token.
 ### 2.5 Build the Docker image
 
 ```yaml
-- name: Build the Docker image
+- name: Build da imagem Docker
   run: |
     docker build -t $REGISTRY/${IMAGE_NAME}:latest .
 ```
@@ -89,21 +89,24 @@ This step builds the Docker image with the latest tag, using the Dockerfile in t
 ### 2.6 Push the image to the GHCR
 
 ```yaml
-- name: Push image to GHCR
+- name: Push da imagem para o GHCR
   run: |
     docker push $REGISTRY/${IMAGE_NAME}:latest
-```
+``` 
 
 This step pushes the Docker image to the GitHub Container Registry.
 
 ### 2.7 Deploy to Kubernetes
 
 ```yaml
-- name: Deploy to Kubernetes
+- name: Deploy no Kubernetes
   uses: azure/k8s-deploy@v4
   with:
     manifests: |
       kubernetes/deployment.yaml
+      kubernetes/service.yaml
+      kubernetes/configmap.yaml
+      kubernetes/hpa.yaml
     images: |
       ghcr.io/${{ github.repository }}:latest
     namespace: default
