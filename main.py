@@ -1,5 +1,3 @@
-import os #teste para quebrar a pipe
-
 from fastapi import FastAPI
 
 from models import DataItem
