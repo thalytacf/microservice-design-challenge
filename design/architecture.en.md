@@ -23,7 +23,7 @@ This microservice is designed with a focus on **simplicity, scalability, and mai
 - Manages reading and writing operations.
 - The database can be replaced without affecting the upper layers.
 
-> Suggested example: **MongoDB**, due to its performance with JSON documents and scalability.
+>**Suggested database:** MongoDB, due to its performance with JSON documents and horizontal scalability.
 
 ---
 

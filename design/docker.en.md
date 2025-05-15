@@ -11,7 +11,7 @@ This document describes the containerization process for the microservice using 
 Below is the `Dockerfile` used in the project:
 
 ```dockerfile
-FROM python:3.11-slim
+FROM python:3.9-slim
 
 WORKDIR /app
 
@@ -31,7 +31,7 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 | Step | Description |
 |------|-------------|
-| FROM python:3.11-slim | Define the base image as the slim version of the official Python image. |
+| FROM python:3.9-slim | Define the base image as the slim version of the official Python image. |
 | WORKDIR /app | Set the working directory to /app. |
 | COPY requirements.txt . | Copy the requirements.txt file to the working directory. |
 | RUN pip install --no-cache-dir -r requirements.txt | Install the project dependencies. |

@@ -11,14 +11,13 @@ This project implements a backend microservice capable of receiving, validating,
 * **Containerization:** Docker
 * **Orchestration:** Kubernetes
 * **CI/CD:** GitHub Actions
-* **Python Version**: 3.11+
-
+* **Python Version**: 3.9
 
 ---
 
 ## Documentation Overview
 
-- [API Design](design/api.md)
+- [API](design/api.md)
 - [Architecture](design/architecture.md)
 - [Database](design/database.md)
 - [Docker](design/docker.md)
@@ -44,13 +43,13 @@ This project implements a backend microservice capable of receiving, validating,
 
 Automated pipeline using **GitHub Actions** ([`.github/workflows/deploy.yaml`](.github/workflows/deploy.yaml)):
 
-1. Checking out source code
-2. Logging into GitHub Container Registry (GHCR)
-3. Building Docker image
-4. Pushing image to GHCR
-5. Deploying to Kubernetes (via `kubectl` and manifests)
-
-![CI/CD Pipeline](docs/pipeline.png)
+1. Code checkout and Python environment setup
+2. Dependency installation with `pip`, including tools for testing and linting
+3. Static code analysis with `ruff`
+4. Unit tests with `pytest`
+5. Building Docker image
+6. Pushing image to GHCR
+5. Deploying to Kubernetes 
 
 ---
 
@@ -63,7 +62,7 @@ YAML manifests provided:
 * `configmap.yaml`
 * `hpa.yaml`
 
-All located in the `/k8s` folder. Deployment configured for horizontal scaling using HPA.
+All located in the `kubernetes` folder. Deployment configured for horizontal scaling using HPA.
 
 ---
 
@@ -80,7 +79,7 @@ Dockerfile provided in the project root. Minimal FastAPI app with:
 
 This project includes initial unit tests and outlines a broader testing strategy to ensure API correctness and future scalability.
 
-### ✅ Implemented Tests
+### Implemented Tests
 
 * **API Tests**
   * Successful creation via `POST /data` using valid payload
@@ -144,12 +143,6 @@ Kubernetes manifests are located in `/kubernetes/` and ready to be applied.
 * Enable GitHub Environments for PR approvals  
 * Setup full test automation  
 * Integrate Redis for caching and asynchronous task handling  
-
----
-
-## Cloud Cost Estimation 
-
-TO DO
 
 ---
 

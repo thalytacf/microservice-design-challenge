@@ -17,16 +17,53 @@ The pipeline is automatically triggered on every push to the `main` branch.
 
 ## 2. Pipeline Steps
 
-### 2.1 Checkout the code
+### 2.1 Checkout the code and Environment Setup
 
 ```yaml
 - name: Checkout code
   uses: actions/checkout@v3
+
+- name: Set up Python
+  uses: actions/setup-python@v4
+  with:
+    python-version: '3.9'
 ```
 
-This step retrieves the code from the repository and makes it available for the subsequent steps.
+This step retrieves the code from the repository and configures the Python environment.
 
-### 2.2 Login to GitHub Container Registry
+### 2.2 Dependency Caching and Installation
+
+```yaml
+- name: Cache pip
+  uses: actions/cache@v3
+  with:
+    path: ~/.cache/pip
+    key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+    restore-keys: |
+      ${{ runner.os }}-pip-
+
+- name: Install dependencies
+  run: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+    pip install pytest ruff
+```
+
+Reuses pip cache to speed up installations and installs project dependencies, including tools for testing and linting.
+
+### 2.3 Static Analysis and Automated Testing
+
+```yaml
+- name: Run linter (ruff)
+  run: ruff check .
+
+- name: Run unit tests (pytest)
+  run: pytest --maxfail=1 --disable-warnings -q
+```
+
+Runs the `ruff` linter to ensure code quality and executes unit tests with `pytest`.
+
+### 2.4 Login to GitHub Container Registry
 
 ```yaml
 - name: Login to GitHub Container Registry
@@ -39,7 +76,7 @@ This step retrieves the code from the repository and makes it available for the 
 
 This step authenticates to the GitHub Container Registry using the GitHub token.
 
-### 2.3 Build the Docker image
+### 2.5 Build the Docker image
 
 ```yaml
 - name: Build the Docker image
@@ -49,7 +86,7 @@ This step authenticates to the GitHub Container Registry using the GitHub token.
 
 This step builds the Docker image with the latest tag, using the Dockerfile in the root of the project.
 
-### 2.4 Push the image to the GHCR
+### 2.6 Push the image to the GHCR
 
 ```yaml
 - name: Push image to GHCR
@@ -59,7 +96,7 @@ This step builds the Docker image with the latest tag, using the Dockerfile in t
 
 This step pushes the Docker image to the GitHub Container Registry.
 
-### 2.5 Deploy to Kubernetes
+### 2.7 Deploy to Kubernetes
 
 ```yaml
 - name: Deploy to Kubernetes
@@ -79,15 +116,14 @@ This step applies the Kubernetes manifests to the cluster.
 
 ## 3. Requirements
 
-- Configure the KUBECONFIG secret with access to the cluster.
-- Configure the repository to allow publishing to ghcr.io (GitHub Container Registry).
-- Have the Kubernetes manifests ready in the kubernetes/ directory.
+- Configure the `KUBECONFIG` secret with access to the cluster.
+- Configure the repository to allow publishing to `ghcr.io` (GitHub Container Registry).
+- Have the Kubernetes manifests ready in the `kubernetes/` directory.
 
 ---
 
 ## 4. Improvements
 
-- Add automated tests before building the image.
-- Validate YAMLs with kubectl dry-run before applying.
+- Validate YAMLs with `kubectl dry-run` before applying.
 - Send Slack or email notifications on failure.
 - Deploy only after Pull Request approval (using GitHub Environments).

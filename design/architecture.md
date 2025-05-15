@@ -23,7 +23,7 @@ Este microserviço foi projetado com foco em **simplicidade, escalabilidade e ma
 - Gerencia a leitura e gravação de dados.
 - A base de dados utilizada pode ser substituída sem impactar as camadas superiores.
 
-> Exemplo sugerido: **MongoDB**, por sua performance com documentos JSON e escalabilidade.
+> **Banco sugerido:** MongoDB, por sua performance com documentos JSON e escalabilidade horizontal.
 
 ---
 ## Diagrama de Arquitetura
@@ -53,7 +53,7 @@ Abaixo está a representação em camadas do microserviço, demonstrando o fluxo
 
 ## Escalabilidade & Boas Práticas
 
-- **Horizontal Scaling**: O serviço pode ser replicado facilmente via Kubernetes (e.g., HPA).
+- **Escalabilidade horizontal**: O serviço pode ser replicado facilmente via Kubernetes (e.g., HPA).
 - **Separação de responsabilidades**: Cada camada tem uma função clara.
 - **Validação rigorosa de dados**: Impede dados inválidos de afetarem o sistema.
 - **Monitoramento futuro**: Planeja-se incluir métricas e alertas com Prometheus + Grafana.
