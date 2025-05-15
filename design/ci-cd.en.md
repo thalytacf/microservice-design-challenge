@@ -71,7 +71,7 @@ Runs the `ruff` linter to ensure code quality and executes unit tests with `pyte
   with:
     registry: ghcr.io
     username: ${{ github.actor }}
-    password: ${{ secrets.GITHUB_TOKEN }}
+    password: ${{ secrets.GHCR_PAT }}
 ```
 
 This step authenticates to the GitHub Container Registry using the GitHub token.

@@ -73,7 +73,7 @@ Executa o linter `ruff` para garantir qualidade do código e executa testes unit
   with:
     registry: ghcr.io
     username: ${{ github.actor }}
-    password: ${{ secrets.GITHUB_TOKEN }}
+    password: ${{ secrets.GHCR_PAT }}
 ```
 
 Autentica no registro de containers do GitHub.
